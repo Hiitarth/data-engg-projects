@@ -1,27 +1,34 @@
-name: Run Python Script
+name: Run Python Scripts
 
 on:
-  push:       # Triggers on push to any branch
-  workflow_dispatch:  # Allows manual run from GitHub UI
+  push:
+    paths:
+      - 'python_scripts/**/main.py'  # Trigger only if any main.py changes
 
 jobs:
-  run-script:
+  run-main-scripts:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repo
       uses: actions/checkout@v3
 
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.10'  
+        python-version: '3.10'
 
-    - name: Install dependencies
+    - name: Find and run changed main.py files
       run: |
-        python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        echo "Looking for changed main.py files..."
+        changed_files=$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | grep '^python_scripts/.*/main.py$' || true)
 
-    - name: Run the script
-      run: |
-        python main.py
+        if [ -z "$changed_files" ]; then
+          echo "No main.py files changed."
+          exit 0
+        fi
+
+        for file in $changed_files; do
+          echo "Running $file..."
+          python "$file"
+        done
