@@ -21,7 +21,7 @@ jobs:
     - name: Find and run changed main.py files
       run: |
         echo "Looking for changed main.py files..."
-        changed_files=$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | grep '^python_scripts/.*/main.py$' || true)
+        changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^python_scripts/.*/main.py$' || true)
 
         if [ -z "$changed_files" ]; then
           echo "No main.py files changed."
