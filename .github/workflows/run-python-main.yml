@@ -22,7 +22,8 @@ jobs:
       run: |
         echo "Looking for main.py files changed in this PR..."
 
-        # Compare PR base and head to get changed files
+        mkdir -p outputs  # Create a folder to store output logs
+
         changed_files=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | grep '^python_scripts/.*/main.py$' || true)
 
         if [ -z "$changed_files" ]; then
@@ -32,5 +33,8 @@ jobs:
 
         for file in $changed_files; do
           echo "Running $file..."
-          python "$file"
+          folder_name=$(dirname "$file" | sed 's|/|_|g')  # e.g., python_scripts_code1
+          log_file="outputs/${folder_name}_output.log"
+          python "$file" > "$log_file" 2>&1
+          echo "Output saved to $log_file"
         done
