@@ -1,7 +1,9 @@
-name: Run main.py on PR Push
+name: Run main.py on Push to Main
 
 on:
-  pull_request:
+  push:
+    branches:
+      - main
     paths:
       - 'python_scripts/**/main.py'
 
@@ -10,15 +12,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout PR branch
+    - name: Checkout repo
       uses: actions/checkout@v3
       with:
-        fetch-depth: 0  # Get full git history
-
-    - name: Fetch base branch manually
-      run: |
-        echo "Fetching base branch: ${{ github.base_ref }}"
-        git fetch origin ${{ github.base_ref }}
+        fetch-depth: 2  # Fetch enough history for commit diff
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -27,15 +24,15 @@ jobs:
 
     - name: Find and run changed main.py files
       run: |
-        echo "Looking for main.py files changed in this PR..."
+        echo "Looking for changed main.py files in the last commit..."
 
         mkdir -p outputs
 
-        # Get changed main.py files between base and PR head
-        changed_files=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | grep '^python_scripts/.*/main.py$' || true)
+        # Get list of changed/added main.py files in the last commit
+        changed_files=$(git diff --name-only HEAD~1 HEAD | grep '^python_scripts/.*/main.py$' || true)
 
         if [ -z "$changed_files" ]; then
-          echo "No main.py files changed in this PR."
+          echo "No main.py files changed in this commit."
           exit 0
         fi
 
