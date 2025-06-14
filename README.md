@@ -17,7 +17,7 @@ You can create an action in github with the following yaml configuration
 4) execute main.py
    
 - Python scripts can be run using Github
-  So if you want to run a python program in github, you can setup and use a github workflow
+  1) So if you want to run a python program in github, you can setup and use a github workflow
 
 - DAG needs to run on a cloud
   1) So if you want to run a DAG, you need a cloud.
