@@ -15,4 +15,11 @@ You can create an action in github with the following yaml configuration
 2) setup python
 3) install python packages
 4) execute main.py
-5) 
+   
+- Python scripts can be run using Github
+  So if you want to run a python program in github, you can setup and use a github workflow
+
+- DAG needs to run on a cloud
+  1) So if you want to run a DAG, you need a cloud.
+  2) If you want to refer to any particular python code/script, you need to pass the script file in the same cloud as that of DAG. Then you can use a PythonOperator
+  3) Another method is to create a container image using docker. Now this globally unique container image can be referred inside the DAG with the help of a kubernetes_pod_operator
