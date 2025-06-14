@@ -40,8 +40,12 @@ jobs:
           echo "Running $file..."
           folder_name=$(dirname "$file" | sed 's|/|_|g')
           log_file="outputs/${folder_name}_output.log"
-          python "$file" > "$log_file" 2>&1
-          echo "Output saved to $log_file"
+          
+          # Run main.py, show output live AND save it
+          echo "------ Output from $file ------"
+          python "$file" 2>&1 | tee "$log_file"
+          echo "------ End of output from $file ------"
+          echo "Output also saved to $log_file"
         done
 
     - name: Upload script output logs
