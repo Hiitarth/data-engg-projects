@@ -7,4 +7,4 @@ if __name__ == "__main__":
   main()
   name = "Maruti"
   vehicle_1 = Vehicle(name)
-  vehicle_1.drive
+  print(vehicle_1.drive())
