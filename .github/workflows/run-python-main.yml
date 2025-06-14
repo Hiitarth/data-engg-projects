@@ -46,7 +46,7 @@ jobs:
 
     - name: Upload script output logs
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: main-py-logs
         path: outputs/*.log
