@@ -10,7 +10,7 @@ def say_hello():
 with DAG(
     dag_id="sample_dag",
     start_date=datetime(2023, 1, 1),
-    schedule_interval=None,
+    schedule_interval="None",
     catchup=False,
     description="A simple DAG to test Astronomer deployment",
     tags=["sample", "test"],
