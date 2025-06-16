@@ -4,7 +4,7 @@ from datetime import datetime
 
 # Define the Python function
 def say_hello():
-    print("Hello, HAstro n omer!!")
+    print("Hello, HAstro n ome  r!!")
 
 # Define the DAG
 with DAG(
