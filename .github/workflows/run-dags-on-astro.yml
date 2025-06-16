@@ -1,24 +1,28 @@
-name: Deploy to Astronomer
+name: Deploy Astro DAGs
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'astro_project/dags/**'
-
-env:
-  ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
+      - 'astro_project/dags/**'  # Update `astro_project` if your project folder is named differently
 
 jobs:
   deploy:
+    name: Deploy DAGs to Astronomer
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
+      - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Set up Astro CLI
+        run: curl -sSL https://install.astronomer.io | sudo bash
+
+      - name: Authenticate with Astronomer
+        run: astro auth login --token ${{ secrets.ASTRO_API_TOKEN }}
+
       - name: Deploy to Astronomer
-        uses: astronomer/deploy-action@v0.10.1
-        with:
-          deployment-id: ${{ secrets.DEPLOYMENT_ID }}
-          root-folder: astro_project
+        run: |
+          cd astro_project
+          astro deploy --force
