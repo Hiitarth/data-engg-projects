@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'astro_project/dags/**'  # Only trigger when DAG files change
+      - 'astro_project/dags/**'  # Trigger only when DAGs change
 
 env:
   ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
@@ -17,11 +17,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Deploy to Astro
-        uses: astronomer/deploy-action@v0.10.1
+      - name: Deploy to Astronomer
+        uses: astronomer/deploy-action@v0.10.2
         with:
           deployment-id: ${{ secrets.DEPLOYMENT_ID }}
           parse: true
+          # Remove input-paths to avoid bad internal shell condition
           working-directory: astro_project
-          input-paths: |
-            astro_project/dags/**/*.py
