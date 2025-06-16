@@ -24,5 +24,5 @@ jobs:
           ASTRO_DEPLOY_KEY: ${{ secrets.ASTRO_API_TOKEN }}
         run: |
           echo "$ASTRO_DEPLOY_KEY" > token.txt
-          astro auth login <your-astronomer-domain> --token "$(cat token.txt)"
+          astro auth login astronomer.cloud --token "$(cat token.txt)"
           astro deploy
