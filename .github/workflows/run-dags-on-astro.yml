@@ -22,4 +22,6 @@ jobs:
         with:
           deployment-id: ${{ secrets.DEPLOYMENT_ID }}
           parse: true
-          working-directory: astro_project  
+          working-directory: astro_project
+          input-paths: |
+            astro_project/dags/**/*.py
