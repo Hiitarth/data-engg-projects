@@ -11,7 +11,7 @@ default_args = {
 
 with DAG(
     dag_id='hello_astro_dag',
-    schedule_interval='@daily',
+    schedule='@daily', 
     default_args=default_args,
     catchup=False,
     tags=['example'],
@@ -22,4 +22,4 @@ with DAG(
         python_callable=say_hello,
     )
 
-    hello_task
+hello_task
