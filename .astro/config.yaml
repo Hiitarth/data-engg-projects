@@ -1,4 +1,0 @@
-project:
-  name: airflow-project
-deploy:
-  dag_dir: dags/
