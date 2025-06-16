@@ -23,5 +23,5 @@ jobs:
       - name: Deploy to Astro
         uses: astronomer/deploy-action@v0.10.1
         with:
-          deployment-id: cmbz7loaj1rkt01l3ujxv2hnb
+          deployment-id: cmbzcoq8b1vfu01j0fh27aghc
           parse: true
