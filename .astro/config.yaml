@@ -1,4 +1,4 @@
 project:
   name: airflow-project
 deploy:
-  dag_dir: dags
+  dag_dir: dags/
