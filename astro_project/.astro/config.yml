@@ -1,4 +1,4 @@
 project:
   name: Dags with Astro
 deploy:
-  dag_dir: astro_project/dags/
+  dag_dir: astro_project/dags
