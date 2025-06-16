@@ -1,5 +1,6 @@
 This is an astro project directory. This directory needs to be set up properly so that Astronomer can properly pick up Airflow DAGs
 Required Structure:
+```
 astro_project_folder/
 │
 ├── dags/                      # Your Airflow DAGs go here
@@ -15,3 +16,4 @@ astro_project_folder/
 ├── .astro/                    # Automatically created by `astro dev init` or CLI
 │   └── config.yaml
 └── .env    
+```
