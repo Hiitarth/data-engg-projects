@@ -13,14 +13,13 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Deploy to Astronomer
         uses: astronomer/deploy-action@v0.10.1
         with:
           deployment-id: ${{ secrets.DEPLOYMENT_ID }}
-          parse: true
-          # Remove input-paths to avoid bad internal shell condition
           working-directory: astro_project
