@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'astro_project/dags/**'  # Trigger only when DAGs change
+      - 'astro_project/dags/**'
 
 env:
   ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
@@ -13,9 +13,8 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
+      - name: Checkout repo
         uses: actions/checkout@v3
 
       - name: Deploy to Astronomer
