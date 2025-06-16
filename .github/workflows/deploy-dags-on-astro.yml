@@ -17,7 +17,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install Astronomer CLI
-        run: curl -sSL https://install.astronomer.io | sudo bash
+        run: |
+          curl -sSfL https://cli.astronomer.io/install | sh
+          sudo mv ./bin/astro /usr/local/bin/astro
 
       - name: Deploy to Astronomer
         env:
