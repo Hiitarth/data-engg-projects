@@ -1,0 +1,28 @@
+# .github/workflows/deploy.yml
+name: Deploy DAGs to Astronomer
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'dags/**'     # Trigger only if files in dags/ are changed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Astronomer CLI
+        run: curl -sSL https://install.astronomer.io | sudo bash
+
+      - name: Deploy to Astronomer
+        env:
+          ASTRO_DEPLOY_KEY: ${{ secrets.ASTRO_API_TOKEN }}
+        run: |
+          echo "$ASTRO_DEPLOY_KEY" > token.txt
+          astro auth login <your-astronomer-domain> --token "$(cat token.txt)"
+          astro deploy
