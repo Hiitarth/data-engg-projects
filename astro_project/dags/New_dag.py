@@ -9,6 +9,7 @@ default_args = {
     'start_date': datetime(2024, 1, 1),
 }
 
+
 with DAG(
     dag_id='hello_astro_dag',
     schedule='@daily', 
