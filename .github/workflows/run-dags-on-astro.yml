@@ -1,0 +1,28 @@
+name: Deploy to Astronomer
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'astro_project/dags/**'  # Only trigger when DAG files change
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Astro CLI
+        run: curl -sSL https://install.astronomer.io | sudo bash
+
+      - name: Authenticate with Astronomer
+        run: |
+          astro auth login astro.cloud --token ${{ secrets.ASTRO_API_TOKEN }}
+
+      - name: Deploy to Astronomer
+        working-directory: astro_project
+        run: |
+          astro deploy
