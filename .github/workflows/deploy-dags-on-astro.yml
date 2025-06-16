@@ -18,8 +18,10 @@ jobs:
 
       - name: Install Astronomer CLI
         run: |
-          curl -sSfL https://cli.astronomer.io/install | sh
-          sudo mv ./bin/astro /usr/local/bin/astro
+          curl -LO https://github.com/astronomer/astro-cli/releases/latest/download/astro_$(uname -s)_x86_64.tar.gz
+          tar -xzf astro_$(uname -s)_x86_64.tar.gz
+          sudo mv astro /usr/local/bin/astro
+          astro version
 
       - name: Deploy to Astronomer
         env:
