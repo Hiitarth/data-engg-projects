@@ -24,4 +24,4 @@ jobs:
         uses: astronomer/deploy-action@v0.10.1
         with:
           deployment-id: cmbzds0op1vtm01j0e79sk0yc
-          parse: true
+          parse: false
