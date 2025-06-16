@@ -8,6 +8,10 @@ on:
     paths:
       - 'dags/**'     # Trigger only if files in dags/ are changed
 
+env:
+  ## Set API Token as an environment variable
+  ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -15,18 +19,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Install Astronomer CLI
-        run: |
-          curl -LO https://github.com/astronomer/astro-cli/releases/latest/download/astro_$(uname -s)_x86_64.tar.gz
-          tar -xzf astro_$(uname -s)_x86_64.tar.gz
-          sudo mv astro /usr/local/bin/astro
-          astro version
-
-      - name: Deploy to Astronomer
-        env:
-          ASTRO_DEPLOY_KEY: ${{ secrets.ASTRO_API_TOKEN }}
-        run: |
-          echo "$ASTRO_DEPLOY_KEY" > token.txt
-          astro auth login astronomer.cloud --token "$(cat token.txt)"
-          astro deploy
+        
+      - name: Deploy to Astro
+        uses: astronomer/deploy-action@v0.10.1
+        with:
+          deployment-id: cmbz7loaj1rkt01l3ujxv2hnb
+          parse: true
