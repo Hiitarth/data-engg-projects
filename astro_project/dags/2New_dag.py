@@ -6,7 +6,6 @@ from datetime import datetime
 def say_hello():
     print("Hello, Astronomer this!")
 
-
 default_args = {
     'start_date': datetime(2024, 1, 1),
 }
