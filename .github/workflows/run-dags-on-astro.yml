@@ -1,4 +1,4 @@
-name: Deploy to AstronomerAdd commentMore actions
+name: Deploy to Astronomer
 
 on:
   push:
@@ -12,7 +12,6 @@ env:
 
 jobs:
   deploy:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -21,12 +20,15 @@ jobs:
 
       - name: Print debug info
         run: |
-          echo "DEPLOYMENT_ID: ${{ secrets.DEPLOYMENT_ID }}"
+          echo "DEPLOYMENT_ID is set? ${{ secrets.DEPLOYMENT_ID != '' }}"
           echo "ASTRO_API_TOKEN is set? ${{ secrets.ASTRO_API_TOKEN != '' }}"
-
+          echo "Listing contents of astro_project/.astro:"
+          ls -l astro_project/.astro || echo " .astro folder missing!"
+          echo "Listing files in astro_project:"
+          ls -l astro_project
 
       - name: Deploy to Astronomer
-        uses: astronomer/deploy-action@v0.10.3
+        uses: astronomer/deploy-action@v0.10.1
         with:
           deployment-id: ${{ secrets.DEPLOYMENT_ID }}
           root-folder: astro_project
