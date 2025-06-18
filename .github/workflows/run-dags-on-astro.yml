@@ -26,7 +26,7 @@ jobs:
 
 
       - name: Deploy to Astronomer
-        uses: astronomer/deploy-action@1
+        uses: astronomer/deploy-action@v0.10.3
         with:
           deployment-id: ${{ secrets.DEPLOYMENT_ID }}
           root-folder: astro_project
