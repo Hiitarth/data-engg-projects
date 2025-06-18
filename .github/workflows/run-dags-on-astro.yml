@@ -19,6 +19,12 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      - name: Print debug info
+        run: |
+          echo "DEPLOYMENT_ID: ${{ secrets.DEPLOYMENT_ID }}"
+          echo "ASTRO_API_TOKEN is set? ${{ secrets.ASTRO_API_TOKEN != '' }}"
+
+
       - name: Deploy to Astronomer
         uses: astronomer/deploy-action@v0.10.1
         with:
