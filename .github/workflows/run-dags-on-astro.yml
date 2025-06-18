@@ -29,4 +29,4 @@ jobs:
         uses: astronomer/deploy-action@v0.10.1
         with:
           deployment-id: ${{ secrets.DEPLOYMENT_ID }}
-          root-folder: astro_project
+          root-folder: data-engg-projects/astro_project
